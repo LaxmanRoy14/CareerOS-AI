@@ -32,3 +32,18 @@ class User:
 
         cursor.close()
         conn.close()
+
+    @staticmethod
+    def get_user_by_id(user_id):
+        conn = get_connection()
+        cursor = conn.cursor(dictionary=True)
+    
+        query = "SELECT id, full_name, email, profile_picture, created_at FROM users WHERE id = %s"
+    
+        cursor.execute(query, (user_id,))
+        user = cursor.fetchone()
+    
+        cursor.close()
+        conn.close()
+    
+        return user
