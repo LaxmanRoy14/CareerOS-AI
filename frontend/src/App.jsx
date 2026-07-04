@@ -1,30 +1,40 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Resume from "./pages/Resume";
-import Jobs from "./pages/Jobs";
-import Roadmap from "./pages/Roadmap";
+import ResumeAnalysis from "./pages/ResumeAnalysis";
+import MockInterview from "./pages/MockInterview";
+import InterviewHistory from "./pages/InterviewHistory";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/Notfound";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/resume-analysis" element={<ResumeAnalysis />} />
+      <Route path="/mock-interview" element={<MockInterview />} />
+      <Route path="/interview-history" element={<InterviewHistory />} />
+      <Route path="/profile" element={<Profile />} />
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
